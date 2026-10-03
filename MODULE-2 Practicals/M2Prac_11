@@ -3,7 +3,7 @@ import scala.io.Source
 object WordFrequencyCounter {
   def main(args: Array[String]): Unit = {
 
-    val filename = "neetu.txt"
+    val filename = "ananya.txt"
 
     // Read the file
     val lines = Source.fromFile(filename).getLines().toList
