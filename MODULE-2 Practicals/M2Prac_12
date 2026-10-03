@@ -6,22 +6,22 @@ object OneHotEncoding {
   def main(args: Array[String]): Unit = {
 
     // Read the CSV file
-    val reader = CSVReader.open(new File("penguins_dataset - penguins.csv"))
+    val reader = CSVReader.open(new File("seeds_dataset - seeds.csv"))
     val data = reader.allWithHeaders()
     reader.close()
 
-    // Get unique species
-    val categories = data.map(_("species")).distinct.sorted
+    // Get unique varieties
+    val categories = data.map(_("varieties")).distinct.sorted
 
     // Perform One-Hot Encoding
     val newData = data.map { row =>
-      val species = row("species")
+      val species = row("varieties")
 
       val oneHot = categories.map(cat =>
-        cat -> (if (cat == species) "1" else "0")
+        cat -> (if (cat == varieties) "1" else "0")
       ).toMap
 
-      (row - "species") ++ oneHot
+      (row - "varieties") ++ oneHot
     }
 
     // Print the header
@@ -34,7 +34,7 @@ object OneHotEncoding {
     }
 
     // Write output to new CSV file
-    val writer = CSVWriter.open(new File("penguins_dataset - penguins_encoded.csv"))
+    val writer = CSVWriter.open(new File("seeds_dataset - seeds_encoded.csv"))
 
     writer.writeRow(headers)
 
@@ -44,6 +44,6 @@ object OneHotEncoding {
 
     writer.close()
 
-    println("One-hot encoded file written to penguins_dataset - penguins_encoded.csv")
+    println("One-hot encoded file written to seeds_dataset - seeds_encoded.csv")
   }
 }
